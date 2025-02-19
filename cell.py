@@ -59,11 +59,14 @@ class Cell:
                 "black",
             )
 
+    def get_center_point(self):
+        return Point((self.x_1 + self.x_2) // 2, (self.y_1 + self.y_2) // 2)
+
     def draw_move(self, to_cell: "Cell", undo: bool = False):
         self.__window.draw_line(
             Line(
-                Point((self.x_1 + self.x_2) // 2, (self.y_1 + self.y_2) // 2),
-                Point((to_cell.x_1 + to_cell.x_2) // 2, (to_cell.y_1 + to_cell.y_2) // 2),
+                self.get_center_point(),
+                to_cell.get_center_point(),
             ),
             "gray" if undo else "red",
         )
