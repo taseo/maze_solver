@@ -1,23 +1,23 @@
 from window import Window
-
 from cell import Cell
+from maze import Maze
 
 
 def main():
-    win = Window(800, 600)
+    screen_width = 900
+    screen_height = 700
+    screen_margin = 50
+    num_rows = 12
+    num_cols = 16
 
-    c_1 = Cell(win)
-    c_2 = Cell(win)
-    c_3 = Cell(win)
+    cell_size_x = (screen_width - 2 * screen_margin) // num_cols
+    cell_size_y = (screen_height - 2 * screen_margin) // num_rows
 
-    c_1.draw(50, 50, 100, 100)
-    c_2.draw(100, 100, 150, 150)
-    c_3.draw(150, 150, 200, 200)
+    window = Window(screen_width, screen_height)
 
-    c_1.draw_move(c_2)
-    c_2.draw_move(c_3, True)
+    Maze(screen_margin, screen_margin, num_rows, num_cols, cell_size_x, cell_size_y, window)
 
-    win.wait_for_close()
+    window.wait_for_close()
 
 
 if __name__ == "__main__":
