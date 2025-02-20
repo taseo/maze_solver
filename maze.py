@@ -25,12 +25,14 @@ class Maze:
         self.__window = window
 
         self.__create_cells()
+        self.__break_entrance_and_exit()
 
     def __create_cells(self) -> None:
-        self.__cells = Flattened2DList(self.num_rows, self.num_cols, Cell(self.__window))
+        self.__cells = Flattened2DList(self.num_rows, self.num_cols)
 
         for row in range(self.num_rows):
             for col in range(self.num_cols):
+                self.__cells[row, col] = Cell(self.__window)
                 self.__draw_cell(row, col)
 
     def __draw_cell(self, row: int, col: int) -> None:
@@ -40,6 +42,16 @@ class Maze:
         self.__cells[row, col].draw(x, y, x + self.cell_width, y + self.cell_height)
 
         self.__animate()
+
+    def __break_entrance_and_exit(self) -> None:
+        first_row, first_col = (0, 0)
+        last_row, last_col = (self.num_rows - 1, self.num_cols - 1)
+
+        self.__cells[first_row, first_col].has_top_wall = False
+        self.__draw_cell(first_row, first_col)
+
+        self.__cells[last_row, last_col].has_bottom_wall = False
+        self.__draw_cell(last_row, last_col)
 
     def __animate(self) -> None:
         self.__window.redraw()

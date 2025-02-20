@@ -23,41 +23,37 @@ class Cell:
         self.x_2 = x_2
         self.y_2 = y_2
 
-        if self.has_left_wall:
-            self.__window.draw_line(
-                Line(
-                    Point(x_1, y_1),
-                    Point(x_1, y_2),
-                ),
-                "black",
-            )
+        self.__window.draw_line(
+            Line(
+                Point(x_1, y_1),
+                Point(x_1, y_2),
+            ),
+            "black" if self.has_left_wall else "white",
+        )
 
-        if self.has_right_wall:
-            self.__window.draw_line(
-                Line(
-                    Point(x_2, y_1),
-                    Point(x_2, y_2),
-                ),
-                "black",
-            )
+        self.__window.draw_line(
+            Line(
+                Point(x_2, y_1),
+                Point(x_2, y_2),
+            ),
+            "black" if self.has_right_wall else "white",
+        )
 
-        if self.has_top_wall:
-            self.__window.draw_line(
-                Line(
-                    Point(x_1, y_1),
-                    Point(x_2, y_1),
-                ),
-                "black",
-            )
+        self.__window.draw_line(
+            Line(
+                Point(x_1, y_1),
+                Point(x_2, y_1),
+            ),
+            "black" if self.has_top_wall else "white",
+        )
 
-        if self.has_bottom_wall:
-            self.__window.draw_line(
-                Line(
-                    Point(x_2, y_2),
-                    Point(x_1, y_2),
-                ),
-                "black",
-            )
+        self.__window.draw_line(
+            Line(
+                Point(x_2, y_2),
+                Point(x_1, y_2),
+            ),
+            "black" if self.has_bottom_wall else "white",
+        )
 
     def get_center_point(self):
         return Point((self.x_1 + self.x_2) // 2, (self.y_1 + self.y_2) // 2)

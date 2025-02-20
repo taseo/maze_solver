@@ -2,10 +2,10 @@ from typing import Tuple, Optional, Any
 
 
 class Flattened2DList:
-    def __init__(self, rows: int, cols: int, initial_value: Optional[Any] = None) -> None:
+    def __init__(self, rows: int, cols: int) -> None:
         self.rows = rows
         self.cols = cols
-        self.data = [initial_value] * (rows * cols)
+        self.data = [None] * (rows * cols)
 
     def __index(self, index: Tuple[int, int]) -> int:
         row, col = index
