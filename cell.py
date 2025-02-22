@@ -17,6 +17,8 @@ class Cell:
         self.x_2 = 0
         self.y_2 = 0
 
+        self.visited = False
+
     def draw(self, x_1: int, y_1: int, x_2: int, y_2: int) -> None:
         self.x_1 = x_1
         self.y_1 = y_1

@@ -15,7 +15,7 @@ def main():
 
     window = Window(screen_width, screen_height)
 
-    Maze(screen_margin, screen_margin, num_rows, num_cols, cell_size_x, cell_size_y, window)
+    Maze(screen_margin, screen_margin, num_rows, num_cols, cell_size_x, cell_size_y, window, 42)
 
     window.wait_for_close()
 
