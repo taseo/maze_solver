@@ -33,6 +33,7 @@ class Maze:
         self.__create_cells()
         self.__break_entrance_and_exit()
         self.__break_walls_r(0, 0)
+        self.__reset_cells_visited()
 
     def __create_cells(self) -> None:
         self.__cells = Grid2D(self.num_rows, self.num_cols)
@@ -126,6 +127,11 @@ class Maze:
             self.__knock_adjacent_wall(x, y, target_x, target_y)
 
             self.__break_walls_r(target_x, target_y)
+
+    def __reset_cells_visited(self) -> None:
+        for y in range(self.num_rows):
+            for x in range(self.num_cols):
+                self.__cells[x, y].visited = False
 
     def __animate(self) -> None:
         self.__window.redraw()
