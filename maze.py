@@ -137,3 +137,62 @@ class Maze:
         self.__window.redraw()
 
         time.sleep(0.05)
+
+    def __solve_r(self, x: int, y: int) -> bool:
+        self.__animate()
+
+        self.__cells[x, y].visited = True
+
+        if x == self.num_cols - 1 and y == self.num_rows - 1:
+            return True
+
+        directions = self.__get_adjacent_unvisited_cells(x, y)
+
+        for direction in directions:
+            target_x, target_y = direction
+
+            # up
+            if y > target_y:
+                if (not self.__cells[x, y].has_top_wall and not self.__cells[target_x, target_y].has_bottom_wall):
+                    self.__cells[x, y].draw_move(self.__cells[target_x, target_y])
+
+                    if self.__solve_r(target_x, target_y):
+                        return True
+                    else:
+                        self.__cells[x, y].draw_move(self.__cells[target_x, target_y], True)
+
+            # right
+            if x < target_x:
+                if (not self.__cells[x, y].has_right_wall and not self.__cells[target_x, target_y].has_left_wall):
+                    self.__cells[x, y].draw_move(self.__cells[target_x, target_y])
+
+                    if self.__solve_r(target_x, target_y):
+                        return True
+                    else:
+                        self.__cells[x, y].draw_move(self.__cells[target_x, target_y], True)
+
+            # down
+            if y < target_y:
+                if (not self.__cells[x, y].has_bottom_wall and not self.__cells[target_x, target_y].has_top_wall):
+                    self.__cells[x, y].draw_move(self.__cells[target_x, target_y])
+
+                    if self.__solve_r(target_x, target_y):
+                        return True
+                    else:
+                        self.__cells[x, y].draw_move(self.__cells[target_x, target_y], True)
+
+            # left
+            if x > target_x:
+                if (not self.__cells[x, y].has_left_wall and not self.__cells[target_x, target_y].has_right_wall):
+                    self.__cells[x, y].draw_move(self.__cells[target_x, target_y])
+
+                    if self.__solve_r(target_x, target_y):
+                        return True
+                    else:
+                        self.__cells[x, y].draw_move(self.__cells[target_x, target_y], True)
+
+        return False
+
+    def solve(self) -> None:
+        self.__solve_r(0, 0)
+
